@@ -25,30 +25,41 @@ def post(abstand):
  
  
 def distanz():
+    print ("distanz...")
+    
+    print ("GPIO.setwarnings...")
     GPIO.setwarnings(False)
     # setze Trigger auf HIGH
+    print ("GPIO.output(GPIO_TRIGGER, True)...")
     GPIO.output(GPIO_TRIGGER, True)
  
     # setze Trigger nach 0.01ms aus LOW
     time.sleep(0.00001)
+    
+    print ("GPIO.output(GPIO_TRIGGER, False)...")
     GPIO.output(GPIO_TRIGGER, False)
  
     StartZeit = time.time()
     StopZeit = time.time()
  
     # speichere Startzeit
+    print ("GPIO.input(GPIO_ECHO) == 0:...")
     while GPIO.input(GPIO_ECHO) == 0:
         StartZeit = time.time()
  
     # speichere Ankunftszeit
+    print ("GPIO.input(GPIO_ECHO) == 1:")
     while GPIO.input(GPIO_ECHO) == 1:
         StopZeit = time.time()
  
     # Zeit Differenz zwischen Start und Ankunft
+    print ("TimeElapsed = StopZeit - StartZeit...")
     TimeElapsed = StopZeit - StartZeit
     # mit der Schallgeschwindigkeit (34300 cm/s) multiplizieren
     # und durch 2 teilen, da hin und zurueck
+    print ("distanz = (TimeElapsed * 34300) / 2...")
     distanz = (TimeElapsed * 34300) / 2
+    print ("distanz.")
     return distanz
  
 if __name__ == '__main__':
@@ -57,7 +68,7 @@ if __name__ == '__main__':
             abstand = distanz()
             print ("Gemessene Entfernung = %.1f cm" % abstand)
             # status = post(abstand)
-            print (status)
+            # print (status)
             
             #30 Sekunden bis zum naechsten Wert
             time.sleep(30)
