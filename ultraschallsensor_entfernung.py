@@ -57,7 +57,7 @@ if __name__ == '__main__':
             abstand = distanz()
             print ("Gemessene Entfernung = %.1f cm" % abstand)
             # status = post(abstand)
-            # print (status)
+            print (status)
             
             #30 Sekunden bis zum naechsten Wert
             time.sleep(30)
