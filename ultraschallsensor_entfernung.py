@@ -2,7 +2,6 @@
 import RPi.GPIO as GPIO
 import time
 import requests
-import MySQLdb
 
 #GPIO Modus (BOARD / BCM)
 GPIO.setmode(GPIO.BCM)
@@ -24,17 +23,6 @@ def post(abstand):
     return r.status_code
 
  
-def logToDb(abstand):
-    db = MySQLdb.connect("localhost", "root", "ultraschall", "messung")
-    curs=db.cursor()
- 
-    try:
-     curs.execute ("INSERT INTO fuellstand (datum, uhrzeit, wert) VALUES (CURRENT_DATE(), NOW(), %.1f);" % abstand)
-     db.commit()
-     print("Done")
-    except:
-     print("Error. Rolling back.")
-     db.rollback()
  
 def distanz():
     GPIO.setwarnings(False)
@@ -68,7 +56,6 @@ if __name__ == '__main__':
         while True:
             abstand = distanz()
             print ("Gemessene Entfernung = %.1f cm" % abstand)
-            logToDb(abstand)
             # status = post(abstand)
             # print (status)
             
