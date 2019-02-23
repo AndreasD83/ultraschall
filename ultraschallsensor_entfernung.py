@@ -26,7 +26,7 @@ def post(abstand):
 def queue(abstand):
     print ("queue...")
     credentials = pika.PlainCredentials('ultra', 'ultra')
-    payload = "timestamp: " + time.strftime("%d.%m.%Y %H:%M:%S") + "value: "+ abstand
+    payload = "timestamp: " + str(time.strftime("%d.%m.%Y %H:%M:%S")) + "value: "+ str(abstand)
     connection = pika.BlockingConnection(pika.ConnectionParameters(
         host='localhost', credentials=credentials))
     channel = connection.channel()
