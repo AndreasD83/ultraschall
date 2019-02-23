@@ -2,6 +2,7 @@
 import RPi.GPIO as GPIO
 import time
 import requests
+import pika
 
 #GPIO Modus (BOARD / BCM)
 GPIO.setmode(GPIO.BCM)
@@ -22,8 +23,23 @@ def post(abstand):
 
     return r.status_code
 
- 
- 
+def queue(abstand):
+    print ("queue...")
+	credentials = pika.PlainCredentials('ultra', 'ultra')
+    payload = {"timestamp": time.strftime("%d.%m.%Y %H:%M:%S"), 'value': abstand}
+    connection = pika.BlockingConnection(pika.ConnectionParameters(
+        host='localhost', credentials=credentials))
+    channel = connection.channel()
+    channel.queue_declare(queue='data')
+    print ('publish: ' + payload)
+	channel.basic_publish(exchange='',
+                      routing_key='difference',
+                      body=payload)
+    print(" [x] Sent 'difference'")
+    print ("queue.")
+    connection.close()
+    print ("queue.")
+
 def distanz():
     print ("distanz...")
     
@@ -69,7 +85,7 @@ if __name__ == '__main__':
             print ("Gemessene Entfernung = %.1f cm" % abstand)
             # status = post(abstand)
             # print (status)
-            
+            queue (abstand)
             #30 Sekunden bis zum naechsten Wert
             time.sleep(30)
  
