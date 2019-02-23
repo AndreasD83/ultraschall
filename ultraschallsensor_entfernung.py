@@ -25,14 +25,14 @@ def post(abstand):
 
 def queue(abstand):
     print ("queue...")
-	credentials = pika.PlainCredentials('ultra', 'ultra')
+    credentials = pika.PlainCredentials('ultra', 'ultra')
     payload = {"timestamp": time.strftime("%d.%m.%Y %H:%M:%S"), 'value': abstand}
     connection = pika.BlockingConnection(pika.ConnectionParameters(
         host='localhost', credentials=credentials))
     channel = connection.channel()
     channel.queue_declare(queue='data')
     print ('publish: ' + payload)
-	channel.basic_publish(exchange='',
+    channel.basic_publish(exchange='',
                       routing_key='difference',
                       body=payload)
     print(" [x] Sent 'difference'")
