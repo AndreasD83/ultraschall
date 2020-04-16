@@ -85,7 +85,7 @@ if __name__ == '__main__':
             print ("Gemessene Entfernung = %.1f cm" % abstand)
             # status = post(abstand)
             # print (status)
-            queue (abstand)
+            #queue (abstand)
             #30 Sekunden bis zum naechsten Wert
             time.sleep(30)
  
