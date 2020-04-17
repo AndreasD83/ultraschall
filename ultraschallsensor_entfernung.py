@@ -25,7 +25,7 @@ def post(abstand):
 
 def queue(abstand):
     print ("queue...")
-    credentials = pika.PlainCredentials('ultra', 'ultra')
+    credentials = pika.PlainCredentials('writer', 'writer')
     payload = "timestamp: " + str(time.strftime("%d.%m.%Y %H:%M:%S")) + ", value: "+ str(abstand)
     connection = pika.BlockingConnection(pika.ConnectionParameters(
         host='localhost', credentials=credentials))
@@ -85,7 +85,7 @@ if __name__ == '__main__':
             print ("Gemessene Entfernung = %.1f cm" % abstand)
             # status = post(abstand)
             # print (status)
-            #queue (abstand)
+            queue (abstand)
             #30 Sekunden bis zum naechsten Wert
             time.sleep(30)
  
