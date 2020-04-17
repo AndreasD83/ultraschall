@@ -32,10 +32,16 @@ def queue(abstand):
     channel = connection.channel()
     channel.queue_declare(queue='data')
     print ('publish: ' + payload)
-    channel.basic_publish(exchange='inbound',
+    if abstand > 100:
+     channel.basic_publish(exchange='inbound',
                       routing_key='difference',
                       body=payload)
-    print(" [x] Sent routing_key 'difference' to exchange 'inbound")
+     print(" [x] Sent routing_key 'difference' to exchange 'inbound")
+    else:
+     channel.basic_publish(exchange='inbound',
+                      routing_key='wrong_value',
+                      body=payload)
+     print(" [x] Sent routing_key 'wrong_value' to exchange 'inbound")
     print ("queue.")
     connection.close()
     print ("queue.")
