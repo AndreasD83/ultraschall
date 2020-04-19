@@ -95,8 +95,8 @@ if __name__ == '__main__':
               # print (status)
               queue (abstand)
  
-           #60 Sekunden bis zu naechsten 5 Werten
-           time.sleep(60)
+            #60 Sekunden bis zu naechsten 5 Werten
+            time.sleep(60)
         # Beim Abbruch durch STRG+C resetten
     except KeyboardInterrupt:
         print("Messung vom User gestoppt")
