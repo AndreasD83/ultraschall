@@ -87,15 +87,15 @@ def distanz():
 if __name__ == '__main__':
     try:
         while True:
-            for x in range(10):
+            for x in range(5):
               abstand = distanz()
               print (x)
               print ("Gemessene Entfernung = %.1f cm" % abstand)
               # status = post(abstand)
               # print (status)
               queue (abstand)
-              #30 Sekunden bis zum naechsten Wert
-              time.sleep(60)
+           #60 Sekunden bis zu nächsten 5 Werten
+           time.sleep(60)
         # Beim Abbruch durch STRG+C resetten
     except KeyboardInterrupt:
         print("Messung vom User gestoppt")
