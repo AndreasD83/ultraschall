@@ -94,7 +94,7 @@ if __name__ == '__main__':
               # status = post(abstand)
               # print (status)
               queue (abstand)
-           #60 Sekunden bis zu nächsten 5 Werten
+           #60 Sekunden bis zu naechsten 5 Werten
            time.sleep(60)
         # Beim Abbruch durch STRG+C resetten
     except KeyboardInterrupt:
